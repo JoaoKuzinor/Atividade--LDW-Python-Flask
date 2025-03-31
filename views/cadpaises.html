@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+{% block content %}
+
+    <h2>Cadastro de Países</h2>
+    <hr>
+    <form action="{{url_for('cadpaises')}}", method = 'POST'>
+
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" required>
+
+        <label for="capital">Capital:</label>
+        <input type="text" name="capital" required>
+
+        <label for="continente">Continente:</label>
+        <input type="text" name="continente" required>
+
+        <label for="moeda">Moeda:</label>
+        <input type="text" name="moeda" required>
+
+        <input type="submit" value="Cadastrar">
+
+    </form>
+
+    <br>
+    <br>
+    <br>
+
+    <h4>Países Cadastrados:</h4>
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Capital</th>
+                <th>Continente</th>
+                <th>Moeda</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pais in paislist %}
+            <tr>
+                <td>{{ pais.nome }}</td>
+                <td>{{ pais.capital }}</td>
+                <td>{{ pais.continente }}</td>
+                <td>{{ pais.moeda }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}

@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<body>
+    <h2>Esta é a página de Países</h2>
+    <hr>
+
+    <!-- <ul>
+        <li>Nome: {{nome}}</li>
+        <li>Capital: {{capital}}</li>
+        <li>Continente: {{continente}}</li>
+        <li>Moeda: {{moeda}}</li>
+    </ul> -->
+
+    {% for k, v in pais.items() %}
+        {{k}}: {{v}} <br>
+    {% endfor %}
+
+    <p>Cidades:</p>
+    <ol>
+        {% for c in cidades: %}
+            <li>{{c}}</li>
+        {% endfor%}
+    </ol> 
+
+    <h4>Cadastrar cidades:</h4>
+    <form action="{{ url_for('paises') }}" method="POST">
+        <label for="cidade">Cidades:</label>
+        <input type="text" name="cidade">
+        <input type="submit" value="Entrar">
+    </form>
+    <br>
+
+{% endblock content %}

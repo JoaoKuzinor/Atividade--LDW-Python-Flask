@@ -1,0 +1,42 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<div class="container" style="background-color: #f0f0f0; border-radius: 8px;">
+    <div class="row">
+        {% for pais in paisesjson %}
+        <div class="col-md-3 m-auto">
+            <div class="card" style="width: 16rem;">
+                <!-- Exibindo a bandeira com margens iguais -->
+                <div class="card-img-top-wrapper" style="overflow: hidden; height: 150px; padding: 0; margin: 0;">
+                    <img src="{{ pais.flags.png }}" class="card-img-top" alt="Bandeira de {{ pais.name.common }}" style="object-fit: cover; width: 100%; height: 100%; margin: 0;">
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ pais.name.common }}</h5>
+                    
+                    <!-- Exibindo a capital -->
+                    <p><strong>Capital:</strong> {{ pais.capital[0] if pais.capital else 'Não disponível' }}</p>
+                    
+                    <!-- Exibindo o continente -->
+                    <p><strong>Continente:</strong> {{ pais.continents[0] }}</p>
+
+                    <!-- Exibindo a moeda -->
+                    <p><strong>Moeda:</strong> 
+                        {% if pais.currencies %}
+                            {{ pais.currencies | first }}
+                        {% else %}
+                            Não disponível
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+    
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<details>
+    <summary>[ Cadastrar novo País ]</summary>
+    <div class="col-md-4">
+        <form action="{{url_for('bancopaises')}}" method="POST">
+            <input type="text" name="nome" placeholder="Nome:" class="form-control" required>
+            <input type="text" name="capital" placeholder="Capital" class="form-control" required>
+            <input type="text" name="continente" placeholder="Continente" class="form-control" required>
+            <input type="text" name="moeda" placeholder="Moeda" class="form-control" required>
+            <br>
+            <input type="submit" value="Cadastrar" class="btn btn-success">
+            <input type="reset" value="Limpar" class="btn btn-danger">
+        </form>
+    </div>
+</details>
+
+<h5>Países Cadastrados:</h5>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Nome:</th>
+            <th>Capital:</th>
+            <th>Continente:</th>
+            <th>Moeda:</th>
+            <th style="text-align: center;" colspan="2">Ações:</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in paisescadastrados.items %}
+        <tr>
+            <td>{{p.nome}}</td>
+            <td>{{p.capital}}</td>
+            <td>{{p.continente}}</td>
+            <td>{{p.moeda}}</td>
+            <td><a style="color: orange; text-decoration: none;" href="{{url_for('edit', id=p.id)}}">Editar</a></td>
+
+            <td><a style="color: red; text-decoration: none;" href="{{url_for('bancopaises', id=p.id)}}" onclick="return confirm('Deseja mesmo excluir o país {{p.nome}}?')">Excluir</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p style="text-align: center">
+    {% if paisescadastrados.has_prev %}
+        <a href="{{url_for('bancopaises', page= paisescadastrados.prev_num)}}"> <<<< Anterior</a>
+    {% endif %}
+    {% if paisescadastrados.has_next %}
+        <a href="{{url_for('bancopaises', page= paisescadastrados.next_num)}}"> Próximo >>>></a>
+</p>
+    {% endif %}
+{% endblock content %}
