@@ -13,4 +13,10 @@ class Pais(db.Model):
         self.continente = continente
         self.capital = capital
         self.moeda = moeda
-        
+
+class Imagem(db.Model):
+    id = db.Column(db.Integer, primary_key = True)    
+    filename = db.Column(db.String(120), unique=True, nullable=False) 
+
+    def __init__(self,filename):
+        self.filename = filename
